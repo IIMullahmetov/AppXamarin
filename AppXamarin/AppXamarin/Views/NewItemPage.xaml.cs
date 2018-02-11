@@ -19,8 +19,9 @@ namespace AppXamarin.Views
 
             Item = new Item
             {
-                Text = "Item name",
-                Description = "This is an item description."
+                Name = "Item name",
+                Password = "This is an item description.",
+				Url = "Some Url"
             };
 
             BindingContext = this;

@@ -3,10 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppXamarin.Views.ItemDetailPage"
              Title="{Binding Title}">
-    <StackLayout Spacing="20" Padding="15">
-        <Label Text="Text:" FontSize="Medium" />
-        <Label Text="{Binding Item.Text}" FontSize="Small"/>
-        <Label Text="Description:" FontSize="Medium" />
-        <Label Text="{Binding Item.Description}" FontSize="Small"/>
-    </StackLayout>
+	<StackLayout Spacing="20" Padding="15">
+		<Label Text="Name" FontSize="Medium" />
+		<Entry Text="{Binding Name}" FontSize="Small" />
+		<Label Text="Url" FontSize="Medium" />
+		<Editor Text="{Binding Url}" FontSize="Small" Margin="0" />
+		<Label Text="Password" FontSize="Medium" />
+		<Editor Text="{Binding Password}" FontSize="Small" Margin="0" />
+		<Button Command="{Binding Save}" Text="Save"/>
+	</StackLayout>
 </ContentPage>

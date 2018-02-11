@@ -7,6 +7,7 @@ using Xamarin.Forms;
 
 using AppXamarin.Models;
 using AppXamarin.Views;
+using AppXamarin.Services;
 
 namespace AppXamarin.ViewModels
 {
@@ -15,7 +16,7 @@ namespace AppXamarin.ViewModels
         public ObservableCollection<Item> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        public ItemsViewModel()
+        public ItemsViewModel(IDataStore<Item> dataStore) : base(dataStore)
         {
             Title = "Browse";
             Items = new ObservableCollection<Item>();
@@ -32,15 +33,17 @@ namespace AppXamarin.ViewModels
         async Task ExecuteLoadItemsCommand()
         {
             if (IsBusy)
-                return;
+			{
+				return;
+			}
 
-            IsBusy = true;
-
+			IsBusy = true;
+	
             try
             {
                 Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
-                foreach (var item in items)
+				System.Collections.Generic.IEnumerable<Item> items = await DataStore.GetItemsAsync(true);
+                foreach (Item item in items)
                 {
                     Items.Add(item);
                 }

@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using AppXamarin.Models;
-using AppXamarin.Views;
 using AppXamarin.ViewModels;
+using AppXamarin.Services;
 
 namespace AppXamarin.Views
 {
@@ -22,16 +17,18 @@ namespace AppXamarin.Views
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new ItemsViewModel();
+            BindingContext = viewModel = new ItemsViewModel(new MockDataStore());
         }
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var item = args.SelectedItem as Item;
+			Item item = args.SelectedItem as Item;
             if (item == null)
-                return;
+			{
+				return;
+			}
 
-            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
+			await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(new MockDataStore(), item)));
 
             // Manually deselect item.
             ItemsListView.SelectedItem = null;
@@ -47,7 +44,9 @@ namespace AppXamarin.Views
             base.OnAppearing();
 
             if (viewModel.Items.Count == 0)
-                viewModel.LoadItemsCommand.Execute(null);
-        }
+			{
+				viewModel.LoadItemsCommand.Execute(null);
+			}
+		}
     }
 }

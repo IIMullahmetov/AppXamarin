@@ -5,6 +5,7 @@ using Xamarin.Forms.Xaml;
 
 using AppXamarin.Models;
 using AppXamarin.ViewModels;
+using AppXamarin.Services;
 
 namespace AppXamarin.Views
 {
@@ -24,13 +25,13 @@ namespace AppXamarin.Views
         {
             InitializeComponent();
 
-            var item = new Item
+			Item item = new Item
             {
-                Text = "Item 1",
-                Description = "This is an item description."
+                Name = "Item 1",
+                Password = "This is an item description."
             };
 
-            viewModel = new ItemDetailViewModel(item);
+            viewModel = new ItemDetailViewModel(new MockDataStore(), item);
             BindingContext = viewModel;
         }
     }

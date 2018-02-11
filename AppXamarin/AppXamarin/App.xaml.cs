@@ -1,6 +1,4 @@
-﻿using System;
-
-using AppXamarin.Views;
+﻿using AppXamarin.Views;
 using Xamarin.Forms;
 
 namespace AppXamarin
@@ -8,11 +6,10 @@ namespace AppXamarin
 	public partial class App : Application
 	{
 
-		public App ()
+		public App (Setup setup)
 		{
+			AppContainer.Container = setup.CreateContainer();
 			InitializeComponent();
-
-
             MainPage = new MainPage();
         }
 
